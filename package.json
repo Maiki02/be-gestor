@@ -4,13 +4,23 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "x  ": "node index.ts",
+    "dev": "nodemon app.ts",
+    "tsc": "tsc",
+    "prod": "tsc && node ./build/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.18.2",
+    "mongoose": "^8.1.1",
+    "morgan": "^1.10.0",
     "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21"
   }
 }
