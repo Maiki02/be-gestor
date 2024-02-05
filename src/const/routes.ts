@@ -1,2 +1,2 @@
-export const CREATE_PRODUCT= '/product';
+export const CREATE_LABEL= '/label';
 export const GET_PRODUCTS= '/products';

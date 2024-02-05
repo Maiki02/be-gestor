@@ -1,5 +1,7 @@
 import { Router } from 'express';
-import { Response } from '../interfaces/responses';
+import { ResponseI } from '../interfaces/responses';
+import { CREATE_LABEL } from '../const/routes';
+import { createLabel } from './controller-label';
 
 export const router = Router();
 
@@ -7,7 +9,10 @@ router.get('/', (req,res)=> {
     res.status(200).json(createResponse('ok', 'success'));
 })
 
-function createResponse(status:string, message:string, data?:any): Response {
+router.post(CREATE_LABEL, createLabel);
+
+
+function createResponse(status:string, message:string, data?:any): ResponseI {
     return {
       status: status,
       message: message,
