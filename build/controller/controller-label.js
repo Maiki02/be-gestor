@@ -86,8 +86,7 @@ const updateLabel = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         res.status(200).json({ message: 'Etiqueta actualizada con éxito', label: updatedLabel });
     }
     catch (error) {
-        // Manejar errores y responder al cliente con un mensaje de error
-        res.status(500).json({ message: 'Error al actualizar la etiqueta', error });
+        handleError(res, error, 'Error al actualizar la etiqueta');
     }
 });
 exports.updateLabel = updateLabel;
@@ -110,8 +109,7 @@ const getLabelsBySection = (req, res) => __awaiter(void 0, void 0, void 0, funct
         res.status(200).json({ message: 'Labels retrieved successfully', labels });
     }
     catch (error) {
-        // Handle errors and respond to the client with an error message
-        res.status(500).json({ message: 'Error retrieving labels', error });
+        handleError(res, error, 'Error retrieving labels');
     }
 });
 exports.getLabelsBySection = getLabelsBySection;

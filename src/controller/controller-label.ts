@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import LabelModel, { Label } from '../models/Label';
 import mongoose from 'mongoose';
+import { handleError } from './controller';
 
 /**
  * Crea una nueva etiqueta en la base de datos.
@@ -113,17 +114,6 @@ const saveLabel = async (labelData: Label): Promise<Label> => {
 const updateLabelStatus = async (id: string): Promise<Label | null> => {
   return await LabelModel.findByIdAndUpdate(id, { status: 0 }, { new: true });
 };
-
-/**
- * Maneja un error y envía una respuesta de error al cliente.
- * @param {Response} res - El objeto de respuesta HTTP.
- * @param {any} error - El error que ocurrió.
- * @param {string} errorMessage - El mensaje de error para enviar al cliente.
- */
-const handleError = (res: Response, error: any, errorMessage: string) => {
-  res.status(500).json({ message: errorMessage, error });
-};
-
 
 export const getLabels = async (req: Request, res: Response) => {
   try {
