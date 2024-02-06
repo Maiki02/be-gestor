@@ -1,9 +1,5 @@
 import mongoose from 'mongoose';
-import * as dotenv from 'dotenv';
-import * as path from 'path';
 
-// Cargar las variables de entorno desde el archivo .env
-dotenv.config({ path: path.resolve(__dirname, '../../mongodb.env') });
 // Lee la URI de conexión desde las variables de entorno
 const url = process.env.MONGODB_URI || 'mongodb://localhost:27017';
 const dbName = process.env.DB_NAME || 'test';

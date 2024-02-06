@@ -1,11 +1,20 @@
 const express = require('express');
+
+import * as dotenv from 'dotenv';
+import * as path from 'path';
+// Cargar las variables de entorno desde el archivo .env
+dotenv.config({ path: path.resolve(__dirname, '../vars.env') });
+
 const morgan= require('morgan');
 const cors= require('cors');
 import { connectToDatabase, disconnectFromDatabase } from './libs/db-connection';
 import { router as routes } from './routes/routes';
+import { createClient } from '@supabase/supabase-js';
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+export const supabase = createClient(process.env.SUP_URL || '', process.env.SUP_KEY || '');
 
 // Configuraciones
 app.set('port', port);

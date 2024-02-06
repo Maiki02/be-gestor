@@ -1,3 +1,8 @@
+export const LOGIN_USER= '/login';
+export const REGISTER_USER= '/register';
+export const GOOGLE_USER= '/google';
+
+
 export const CREATE_LABEL= '/label';
 export const UPDATE_LABEL= '/label';
 export const DELETE_LABEL= '/label/:id';

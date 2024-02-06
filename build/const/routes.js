@@ -1,6 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GET_REGISTERS_BY_SECTION = exports.DELETE_REGISTER = exports.UPDATE_REGISTER = exports.CREATE_REGISTER = exports.GET_LABELS_BY_SECTION = exports.DELETE_LABEL = exports.UPDATE_LABEL = exports.CREATE_LABEL = void 0;
+exports.GET_REGISTERS_BY_SECTION = exports.DELETE_REGISTER = exports.UPDATE_REGISTER = exports.CREATE_REGISTER = exports.GET_LABELS_BY_SECTION = exports.DELETE_LABEL = exports.UPDATE_LABEL = exports.CREATE_LABEL = exports.GOOGLE_USER = exports.REGISTER_USER = exports.LOGIN_USER = void 0;
+exports.LOGIN_USER = '/login';
+exports.REGISTER_USER = '/register';
+exports.GOOGLE_USER = '/google';
 exports.CREATE_LABEL = '/label';
 exports.UPDATE_LABEL = '/label';
 exports.DELETE_LABEL = '/label/:id';
