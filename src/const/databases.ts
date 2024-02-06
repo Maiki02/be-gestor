@@ -1,1 +1,1 @@
-export const PRODUCT_DATABASE='products';
+export const LABEL_DATABASE='labels';
