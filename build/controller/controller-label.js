@@ -26,6 +26,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getLabels = exports.getLabelsBySection = exports.updateLabel = exports.deleteLabel = exports.createLabel = void 0;
 const Label_1 = __importDefault(require("../models/Label"));
 const mongoose_1 = __importDefault(require("mongoose"));
+const controller_1 = require("./controller");
 /**
  * Crea una nueva etiqueta en la base de datos.
  * @param {Request} req - El objeto de solicitud HTTP.
@@ -39,7 +40,7 @@ const createLabel = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         res.status(201).json({ message: 'Etiqueta creada con éxito', label });
     }
     catch (error) {
-        handleError(res, error, 'Error al crear la etiqueta');
+        (0, controller_1.handleError)(res, error, 'Error al crear la etiqueta');
     }
 });
 exports.createLabel = createLabel;
@@ -59,7 +60,7 @@ const deleteLabel = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         res.status(200).json({ message: 'Etiqueta eliminada con éxito', label });
     }
     catch (error) {
-        handleError(res, error, 'Error al eliminar la etiqueta');
+        (0, controller_1.handleError)(res, error, 'Error al eliminar la etiqueta');
     }
 });
 exports.deleteLabel = deleteLabel;
@@ -86,7 +87,7 @@ const updateLabel = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         res.status(200).json({ message: 'Etiqueta actualizada con éxito', label: updatedLabel });
     }
     catch (error) {
-        handleError(res, error, 'Error al actualizar la etiqueta');
+        (0, controller_1.handleError)(res, error, 'Error al actualizar la etiqueta');
     }
 });
 exports.updateLabel = updateLabel;
@@ -109,7 +110,7 @@ const getLabelsBySection = (req, res) => __awaiter(void 0, void 0, void 0, funct
         res.status(200).json({ message: 'Labels retrieved successfully', labels });
     }
     catch (error) {
-        handleError(res, error, 'Error retrieving labels');
+        (0, controller_1.handleError)(res, error, 'Error retrieving labels');
     }
 });
 exports.getLabelsBySection = getLabelsBySection;
@@ -131,15 +132,6 @@ const saveLabel = (labelData) => __awaiter(void 0, void 0, void 0, function* () 
 const updateLabelStatus = (id) => __awaiter(void 0, void 0, void 0, function* () {
     return yield Label_1.default.findByIdAndUpdate(id, { status: 0 }, { new: true });
 });
-/**
- * Maneja un error y envía una respuesta de error al cliente.
- * @param {Response} res - El objeto de respuesta HTTP.
- * @param {any} error - El error que ocurrió.
- * @param {string} errorMessage - El mensaje de error para enviar al cliente.
- */
-const handleError = (res, error, errorMessage) => {
-    res.status(500).json({ message: errorMessage, error });
-};
 const getLabels = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // Obtener todas las etiquetas de la base de datos

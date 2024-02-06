@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import LabelModel, { Label } from '../models/Label';
+import LabelModel, { LabelI } from '../models/Label';
 import mongoose from 'mongoose';
 import { handleError } from './controller';
 
@@ -11,7 +11,7 @@ import { handleError } from './controller';
  */
 export const createLabel = async (req: Request, res: Response) => {
   try {
-    const labelData: Label = req.body;
+    const labelData: LabelI = req.body;
     const label = await saveLabel(labelData);
     res.status(201).json({ message: 'Etiqueta creada con éxito', label });
   } catch (error) {
@@ -46,7 +46,7 @@ export const deleteLabel = async (req: Request, res: Response) => {
  */
 export const updateLabel = async (req: Request, res: Response) => {
   try {
-    const { _id, ...updatedLabelData }: Label = req.body;
+    const { _id, ...updatedLabelData }: LabelI = req.body;
     
     // Verificar si se proporcionó el _id
     if (!_id) {
@@ -100,8 +100,8 @@ export const getLabelsBySection = async (req: Request, res: Response) => {
  * @param {Label} labelData - Los datos de la etiqueta a guardar.
  * @returns {Promise<Label>} Una promesa que resuelve la etiqueta guardada.
  */
-const saveLabel = async (labelData: Label): Promise<Label> => {
-  let label: Label = new LabelModel(labelData);
+const saveLabel = async (labelData: LabelI): Promise<LabelI> => {
+  let label: LabelI = new LabelModel(labelData);
   label._id = !label._id ? new mongoose.Types.ObjectId() : label._id;
   return await label.save();
 };
@@ -111,14 +111,14 @@ const saveLabel = async (labelData: Label): Promise<Label> => {
  * @param {string} id - El ID de la etiqueta a actualizar.
  * @returns {Promise<Label | null>} Una promesa que resuelve la etiqueta actualizada o null si no se encontró la etiqueta.
  */
-const updateLabelStatus = async (id: string): Promise<Label | null> => {
+const updateLabelStatus = async (id: string): Promise<LabelI | null> => {
   return await LabelModel.findByIdAndUpdate(id, { status: 0 }, { new: true });
 };
 
 export const getLabels = async (req: Request, res: Response) => {
   try {
     // Obtener todas las etiquetas de la base de datos
-    const labels: Label[] = await LabelModel.find();
+    const labels: LabelI[] = await LabelModel.find();
     // Responder al cliente con las etiquetas obtenidas
     res.status(200).json(labels);
   } catch (error) {

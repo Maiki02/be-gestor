@@ -1,7 +1,12 @@
 import mongoose from 'mongoose';
+import * as dotenv from 'dotenv';
+import * as path from 'path';
 
-const url = 'mongodb+srv://miqueasdavidgentile:tIZkFrbFbGDeH7D9@clustergentile.tsdi0w6.mongodb.net/?retryWrites=true&w=majority'; // Cambia la URL si tu base de datos está alojada en otro lugar
-const dbName = 'gestor'; // Cambia el nombre de la base de datos según tu preferencia
+// Cargar las variables de entorno desde el archivo .env
+dotenv.config({ path: path.resolve(__dirname, '../../mongodb.env') });
+// Lee la URI de conexión desde las variables de entorno
+const url = process.env.MONGODB_URI || 'mongodb://localhost:27017';
+const dbName = process.env.DB_NAME || 'test';
 
 // Conecta a la base de datos MongoDB
 export async function connectToDatabase(): Promise<void> {

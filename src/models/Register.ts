@@ -1,11 +1,11 @@
 import mongoose, { Schema, Document } from 'mongoose';
 import { REGISTER_DATABASE } from '../const/databases';
-import LabelModel, { Label } from './Label';
+import { LabelI, LabelSchema } from './Label';
 
-export interface Register extends Document {
+export interface RegisterI extends Document {
     _id: mongoose.Types.ObjectId;
     section: string;
-    label: Label;
+    label: LabelI;
     date: string;
     amount: number;
     coin: string;
@@ -18,7 +18,7 @@ export interface Register extends Document {
 const RegisterSchema = new Schema({
     _id: { type: Schema.Types.ObjectId, required: false },
     section: { type: String, required: true },
-    label: { type: LabelModel, required: true },
+    label: { type: LabelSchema, required: true },
     date: { type: String, required: true },
     amount: { type: Number, required: true },
     coin: { type: String, required: true },
@@ -30,4 +30,4 @@ const RegisterSchema = new Schema({
     collection: REGISTER_DATABASE
 });
 
-export default mongoose.model<Register>('Register', RegisterSchema);
+export default mongoose.model<RegisterI>('Register', RegisterSchema);

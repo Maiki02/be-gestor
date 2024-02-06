@@ -1,7 +1,7 @@
 import mongoose, { Schema, Document } from 'mongoose';
 import { LABEL_DATABASE } from '../const/databases';
 
-export interface Label extends Document {
+export interface LabelI extends Document {
     _id: mongoose.Types.ObjectId;
     name: string;
     icon: string;
@@ -13,7 +13,7 @@ export interface Label extends Document {
     updatedAt?: Date;
 }
 
-const LabelSchema = new Schema({
+export const LabelSchema = new Schema({
     _id: { type: Schema.Types.ObjectId, required: false },
     name: { type: String, required: true },
     icon: { type: String, required: true },
@@ -27,4 +27,4 @@ const LabelSchema = new Schema({
     collection: LABEL_DATABASE
 });
 
-export default mongoose.model<Label>('Label', LabelSchema);
+export default mongoose.model<LabelI>('Label', LabelSchema);

@@ -23,20 +23,21 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.LabelSchema = void 0;
 const mongoose_1 = __importStar(require("mongoose"));
 const databases_1 = require("../const/databases");
-exports.LabelSchema = new mongoose_1.Schema({
+const Label_1 = require("./Label");
+const RegisterSchema = new mongoose_1.Schema({
     _id: { type: mongoose_1.Schema.Types.ObjectId, required: false },
-    name: { type: String, required: true },
-    icon: { type: String, required: true },
-    color: { type: String, required: true },
     section: { type: String, required: true },
+    label: { type: Label_1.LabelSchema, required: true },
+    date: { type: String, required: true },
+    amount: { type: Number, required: true },
+    coin: { type: String, required: true },
     description: { type: String, required: false },
     status: { type: Number, required: false, default: 1 },
-    createdAt: { type: Date, required: false, default: Date.now },
-    updatedAt: { type: Date, required: false, default: Date.now }
+    createdAt: { type: String, required: false, default: Date.now },
+    updatedAt: { type: String, required: false, default: Date.now }
 }, {
-    collection: databases_1.LABEL_DATABASE
+    collection: databases_1.REGISTER_DATABASE
 });
-exports.default = mongoose_1.default.model('Label', exports.LabelSchema);
+exports.default = mongoose_1.default.model('Register', RegisterSchema);
