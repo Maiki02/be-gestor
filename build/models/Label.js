@@ -24,15 +24,18 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importStar(require("mongoose"));
+const databases_1 = require("../const/databases");
 const LabelSchema = new mongoose_1.Schema({
     _id: { type: mongoose_1.Schema.Types.ObjectId, required: false },
     name: { type: String, required: true },
     icon: { type: String, required: true },
     color: { type: String, required: true },
-    section: { type: String, required: false },
+    section: { type: String, required: true },
     description: { type: String, required: false },
     status: { type: Number, required: false, default: 1 },
     createdAt: { type: Date, required: false, default: Date.now },
     updatedAt: { type: Date, required: false, default: Date.now }
+}, {
+    collection: databases_1.LABEL_DATABASE
 });
 exports.default = mongoose_1.default.model('Label', LabelSchema);

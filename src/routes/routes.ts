@@ -1,21 +1,21 @@
 import { Router } from 'express';
-import { ResponseI } from '../interfaces/responses';
-import { CREATE_LABEL } from '../const/routes';
-import { createLabel } from './controller-label';
+import { CREATE_LABEL, DELETE_LABEL, GET_LABELS_BY_SECTION, UPDATE_LABEL } from '../const/routes';
+import { createLabel, deleteLabel, getLabelsBySection, updateLabel } from '../controller/controller-label';
 
 export const router = Router();
 
 router.get('/', (req,res)=> {
-    res.status(200).json(createResponse('ok', 'success'));
+    res.status(200).json({status:'ok', message:'Hello World!'});
 })
 
+//--------- LABELS ---------\\
 router.post(CREATE_LABEL, createLabel);
+router.put(UPDATE_LABEL, updateLabel);
+router.delete(DELETE_LABEL, deleteLabel);
+router.get(GET_LABELS_BY_SECTION, getLabelsBySection);
 
-
-function createResponse(status:string, message:string, data?:any): ResponseI {
-    return {
-      status: status,
-      message: message,
-      data: data
-  };
-}
+//--------- REGISTERS ---------\\
+// router.post(CREATE_REGISTER, createRegister);
+// router.put(UPDATE_REGISTER, updateRegister);
+// router.delete(DELETE_REGISTER, deleteRegister);
+// router.get(GET_REGISTERS_BY_SECTION, getRegistersBySection);
