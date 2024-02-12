@@ -9,71 +9,66 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.callBackGoogle = exports.registerWithGoogle = exports.registerUser = exports.loginUser = void 0;
-const app_1 = require("../app");
+exports.registerWithGoogle = exports.registerUser = exports.loginUser = void 0;
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+const jwtSecret = process.env.JWT_SECRET || '';
+console.log(jwtSecret);
 const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { email, password } = req.body;
+    /*const { email, password } = req.body;
+
     try {
-        const { data, error } = yield app_1.supabase.auth.signInWithPassword({ email, password, });
-        console.log(data);
-        if ((error === null || error === void 0 ? void 0 : error.status) == 400) {
-            return res.status(400).json({ message: 'Credenciales incorrectas' });
-        }
-        res.status(200).json(data);
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password, });
+      console.log(data)
+
+      if(error?.status==400){
+        return res.status(400).json({ message: 'Credenciales incorrectas' });
+      }
+      
+  
+      res.status(200).json(data);
+    } catch (error) {
+      res.status(400).json({ error: error });
+    }*/
+    try {
+        // Aquí puedes manejar la autenticación por email, como verificar credenciales, etc.
+        // Una vez que el usuario se autentica correctamente, puedes generar tokens JWT y refresh tokens.
+        // Generar token JWT
+        const token = jwt.sign({ usuario: req.body.email }, 'tu_secreto', { expiresIn: '1h' });
+        // Generar refresh token (si es necesario)
+        // Devolver tokens al cliente
+        res.json({ token });
     }
     catch (error) {
-        res.status(400).json({ error: error });
+        console.error(error);
+        res.status(500).json({ error: 'Error durante la autenticación por email' });
     }
 });
 exports.loginUser = loginUser;
 const registerUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { email, password } = req.body;
-    try {
-        const response = yield app_1.supabase.auth.signUp({ email, password });
-        res.status(200).json(response);
-    }
-    catch (error) {
-        res.status(400).json({ error: error });
-    }
+    /*    const { email, password } = req.body;
+        try {
+            const response = await supabase.auth.signUp({ email, password });
+    
+            res.status(200).json(response);
+        } catch (error) {
+            res.status(400).json({ error: error });
+        }*/
 });
 exports.registerUser = registerUser;
 const registerWithGoogle = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const response = app_1.supabase.auth.signInWithOAuth({ provider: 'google' }).then(resG => {
-            var _a;
-            console.log(resG);
-            res.redirect((_a = resG.data.url) !== null && _a !== void 0 ? _a : '');
-        });
-        console.log(response);
-        res.status(200).json(response);
+        // Aquí puedes manejar la autenticación por Google.
+        // Una vez que el usuario se autentica correctamente, puedes generar tokens JWT y refresh tokens.
+        // Generar token JWT
+        const token = jwt.sign({ usuario: req.body.googleIdToken }, 'tu_secreto', { expiresIn: '1h' });
+        // Generar refresh token (si es necesario)
+        // Devolver tokens al cliente
+        res.json({ token });
     }
     catch (error) {
-        res.status(400).json({ error: error });
+        console.error(error);
+        res.status(500).json({ error: 'Error durante la autenticación por Google' });
     }
 });
 exports.registerWithGoogle = registerWithGoogle;
-const callBackGoogle = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const response = app_1.supabase.auth.getSession();
-        console.log(response);
-        res.status(200).json(response);
-    }
-    catch (error) {
-        res.status(400).json({ error: error });
-    }
-});
-exports.callBackGoogle = callBackGoogle;
-/* Ruta de redireccionamiento de Supabase OAuth
-app.get('/auth/callback', async (req, res) => {
-  const { error, user, session } = await supabase.auth.api.getUserByCookie(req);
-
-  if (error) {
-    return res.status(401).json({ error: error.message });
-  }
-
-  if (user) {
-    return res.status(200).json({ user, session });
-  }
-
-  return res.status(400).json({ message: 'No se pudo completar la autenticación' });
-});*/ 
