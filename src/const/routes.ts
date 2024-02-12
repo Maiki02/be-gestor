@@ -1,7 +1,7 @@
-export const LOGIN_USER= '/login';
-export const REGISTER_USER= '/register';
-export const GOOGLE_USER= '/google';
-
+export const LOGIN_USER= '/login-email';
+export const REGISTER_USER= '/sign-up';
+export const GOOGLE_USER= '/login-google';
+export const GET_TOKEN= '/get-token';
 
 export const CREATE_LABEL= '/label';
 export const UPDATE_LABEL= '/label';

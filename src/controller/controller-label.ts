@@ -93,8 +93,6 @@ export const getLabelsBySection = async (req: Request, res: Response) => {
   }
 };
 
-
-
 /**
  * Guarda una nueva etiqueta en la base de datos.
  * @param {Label} labelData - Los datos de la etiqueta a guardar.

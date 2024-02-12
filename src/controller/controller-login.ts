@@ -1,11 +1,12 @@
 import { Request, Response } from "express";
 import { Tokens } from "../interfaces/auth";
+import { handleError } from "./controller";
 const jwt = require('jsonwebtoken');
 
 const jwtSecret = process.env.JWT_SECRET || '';
 const refreshTokenSecret = process.env.REFRESH_TOKEN_SECRET || '';
 
-export const loginUser = async (req: Request, res: Response) => {
+export const loginWithEmail = async (req: Request, res: Response) => {
     /*const { email, password } = req.body;
 
     try {
@@ -38,15 +39,13 @@ export const loginUser = async (req: Request, res: Response) => {
   }
 }
 
-export const registerUser = async (req: Request, res: Response) => {
-/*    const { email, password } = req.body;
-    try {
-        const response = await supabase.auth.signUp({ email, password });
+export const registerWithEmail = async (req: Request, res: Response) => {
+  try{
 
-        res.status(200).json(response);
-    } catch (error) {
-        res.status(400).json({ error: error });
-    }*/
+
+  } catch (error) {
+    handleError(res, error, 'Error al registrar el usuario');
+  }
 };
 
 export const registerWithGoogle = async (req: Request, res: Response) => {
@@ -64,6 +63,14 @@ export const registerWithGoogle = async (req: Request, res: Response) => {
   } catch (error) {
       console.error(error);
       res.status(500).json({ error: 'Error durante la autenticación por Google' });
+  }
+}
+
+export const getTokenAndRefreshToken = async (req: Request, res: Response) => {
+  try{
+
+  } catch (error) {
+    handleError(res, error, 'Error al obtener el token');
   }
 }
 

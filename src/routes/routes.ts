@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import { CREATE_LABEL, CREATE_REGISTER, DELETE_LABEL, DELETE_REGISTER, GET_LABELS_BY_SECTION, GET_REGISTERS_BY_SECTION, GOOGLE_USER, LOGIN_USER, REGISTER_USER, UPDATE_LABEL, UPDATE_REGISTER } from '../const/routes';
+import { CREATE_LABEL, CREATE_REGISTER, DELETE_LABEL, DELETE_REGISTER, GET_LABELS_BY_SECTION, GET_REGISTERS_BY_SECTION, GET_TOKEN, GOOGLE_USER, LOGIN_USER, REGISTER_USER, UPDATE_LABEL, UPDATE_REGISTER } from '../const/routes';
 import { createLabel, deleteLabel, getLabelsBySection, updateLabel } from '../controller/controller-label';
 import { createRegister, deleteRegister, getRegistersBySection, updateRegister } from '../controller/controller-register';
-import { loginUser, registerUser, registerWithGoogle } from '../controller/controller-login';
+import { getTokenAndRefreshToken, loginWithEmail, registerWithEmail, registerWithGoogle } from '../controller/controller-login';
 
 export const router = Router();
 
@@ -11,9 +11,10 @@ router.get('/', (req,res)=> {
 })
 
 //--------- LOGIN ---------\\
-router.post(LOGIN_USER, loginUser)
-router.post(REGISTER_USER, registerUser)
-router.get(GOOGLE_USER, registerWithGoogle)
+router.post(LOGIN_USER, loginWithEmail)
+router.post(REGISTER_USER, registerWithEmail)
+router.post(GOOGLE_USER, registerWithGoogle)
+router.post(GET_TOKEN, getTokenAndRefreshToken)
 
 
 //--------- LABELS ---------\\
